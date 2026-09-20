@@ -9,7 +9,7 @@ const gravity: f32 = 5;
 const player_speed: f32 = 6;
 
 pub const Player = struct {
-    position: rl.Vector2 = rl.Vector2{.x = 250, .y = 250},
+    position: rl.Vector2 = rl.Vector2{.x = 150, .y = 250},
     size: Size2D = Size2D{.w = 32, .h = 64},
 
     jumpTimer: Timer = Timer{.frameCount = 9000},
