@@ -1,7 +1,7 @@
 const rl = @import("raylib");
 const CharacterGraphics = @import("characterGraphics.zig").CharacterGraphics;
 const Size2D = @import("../geometry.zig").Size2D;
-const InputHandler = @import("../input.zig").InputHandler;
+const PlayerInputHandler = @import("../input.zig").PlayerInputHandler;
 const Timer = @import("../time.zig").Timer;
 
 const jump_velocity: f32 = -20;
@@ -20,7 +20,7 @@ pub const Character = struct {
     graphics: CharacterGraphics = CharacterGraphics{},
 
 
-    pub fn update(self: *@This(), ih: *InputHandler) void {
+    pub fn update(self: *@This(), ih: *PlayerInputHandler) void {
         
         if (self.position.y < 250) { // Temporary airborne check
             self.isAirborne = true;
@@ -40,7 +40,7 @@ pub const Character = struct {
         }
         
         if (!self.isAirborne) {
-            if (ih.aTapped) {
+            if (ih.upTapped) {
                 self.yVelocity = jump_velocity;
                 self.isAirborne = true;
                 self.jumpTimer.reset();
@@ -51,7 +51,7 @@ pub const Character = struct {
             self.yVelocity += gravity;
 
             // longer you press jump, higher you jump up to a point
-            if (ih.aPressed and self.jumpTimer.frameCount < 8) {
+            if (ih.upPressed and self.jumpTimer.frameCount < 8) {
                 self.yVelocity = jump_velocity;
             }
 

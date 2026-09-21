@@ -5,7 +5,7 @@ const rl = @import("raylib");
 
 const bt = @import("fall_of_the_bone_druids");
 const GameConfig = bt.GameConfig;
-const InputHandler = bt.Input.InputHandler;
+const PlayerInputHandler = bt.Input.PlayerInputHandler;
 const Timer = bt.Time.Timer;
 const Game = bt.Game.Game;
 
@@ -40,8 +40,7 @@ pub fn main(init: std.process.Init) !void {
 
     // SETUP top-level objects
     var globalTimer = Timer{};
-    var ih = InputHandler{};
-    var game = Game{.inputHandler = &ih};
+    var game = Game{};
     
     try game.load();
     defer game.unload();
@@ -50,7 +49,7 @@ pub fn main(init: std.process.Init) !void {
     while (!rl.windowShouldClose()) {
         
         //INPUT
-        ih.handleInput();
+        // TODO: Make universal menu inputs, player inputs are handled separately in Game obj for future GGPO support
 
         //UPDATE
         game.update();
