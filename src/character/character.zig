@@ -6,9 +6,15 @@ const Timer = @import("../time.zig").Timer;
 
 const jump_velocity: f32 = -20;
 const gravity: f32 = 5;
-const character_speed: f32 = 6;
 
 pub const Character = struct {
+    const character_speed: f32 = 6;
+
+    const maxHealth: f32 = 100.0;
+    const maxMeter: f32 = 500.0;
+    health: f32 = maxHealth,
+    meter: f32 = maxMeter,
+
     position: rl.Vector2 = rl.Vector2{.x = 150, .y = 250},
     size: Size2D = Size2D{.w = 32, .h = 64},
 
