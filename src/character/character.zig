@@ -1,14 +1,14 @@
 const rl = @import("raylib");
-const PlayerGraphics = @import("playerGraphics.zig").PlayerGraphics;
+const CharacterGraphics = @import("characterGraphics.zig").CharacterGraphics;
 const Size2D = @import("../geometry.zig").Size2D;
 const InputHandler = @import("../input.zig").InputHandler;
 const Timer = @import("../time.zig").Timer;
 
 const jump_velocity: f32 = -20;
 const gravity: f32 = 5;
-const player_speed: f32 = 6;
+const character_speed: f32 = 6;
 
-pub const Player = struct {
+pub const Character = struct {
     position: rl.Vector2 = rl.Vector2{.x = 150, .y = 250},
     size: Size2D = Size2D{.w = 32, .h = 64},
 
@@ -17,7 +17,7 @@ pub const Player = struct {
     xVelocity: f32 = 0,
     yVelocity: f32 = 0,
 
-    graphics: PlayerGraphics = PlayerGraphics{},
+    graphics: CharacterGraphics = CharacterGraphics{},
 
 
     pub fn update(self: *@This(), ih: *InputHandler) void {
@@ -27,10 +27,10 @@ pub const Player = struct {
         } 
 
         if (ih.leftPressed) {
-            self.xVelocity = -player_speed;
+            self.xVelocity = -character_speed;
         }
         if (ih.rightPressed) {
-            self.xVelocity = player_speed;
+            self.xVelocity = character_speed;
         }
         if (ih.rightPressed == ih.leftPressed) {
             // Slow down, don't just stop immediately
