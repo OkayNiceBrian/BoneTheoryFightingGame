@@ -68,7 +68,7 @@ pub const Character = struct {
             if (self.position.y > 250 - self.yVelocity) {
                 self.position.y = 250;
                 self.yVelocity = 0;
-                self.isAirborne = false;
+                self.isAirborne = false; 
             }
 
             if (self.jumpTimer.frameCount < 9000) {

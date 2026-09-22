@@ -49,10 +49,19 @@ pub const PlayerInputHandler = struct {
     startTapped: bool = false,
     selectTapped: bool = false,
 
+    // Motion inputs
+    qcfActive: bool = false,
+    qcbActive: bool = false,
+    dpActive: bool = false,
+    rdpActive: bool = false, // Reverse DP
+    hcfActive: bool = false,
+    hcbActive: bool = false,
+
     pub fn handleInput(self: *@This()) void {
         self.resetTappedKeys();
         self.handlePresses();
         self.handleReleases();
+        self.recordInputsForCurrentFrame();
     }
 
     // TODO: Make key bindings dynamic
@@ -125,6 +134,10 @@ pub const PlayerInputHandler = struct {
         if (rl.isKeyPressed(self.startButton)) {
             self.startPressed = true;
             self.startTapped = true;
+        }
+
+        if (rl.isKeyUp(self.leftButton) and rl.isKeyUp(self.upButton) and rl.isKeyUp(self.rightButton) and rl.isKeyUp(self.downButton)) {
+            // If no direction is input, record a 0 for the frame
         }
     }
 
@@ -201,5 +214,9 @@ pub const PlayerInputHandler = struct {
         self.throwTapped = false;
         self.startTapped = false;
         self.selectTapped = false;
+    }
+
+    fn recordInputsForCurrentFrame(self: *@This()) void {
+
     }
 };
