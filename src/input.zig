@@ -61,7 +61,7 @@ pub const PlayerInputHandler = struct {
         self.resetTappedKeys();
         self.handlePresses();
         self.handleReleases();
-        self.recordInputsForCurrentFrame();
+        self.recordCurrentFrameInputs();
     }
 
     // TODO: Make key bindings dynamic
@@ -216,7 +216,7 @@ pub const PlayerInputHandler = struct {
         self.selectTapped = false;
     }
 
-    fn recordInputsForCurrentFrame(self: *@This()) void {
+    fn recordCurrentFrameInputs(self: *@This()) void {
 
     }
 };
